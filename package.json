@@ -1,0 +1,20 @@
+{
+  "name": "nodejs-filemanager",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anticher/nodejs-filemanager.git"
+  },
+  "author": "anticher",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anticher/nodejs-filemanager/issues"
+  },
+  "homepage": "https://github.com/anticher/nodejs-filemanager#readme"
+}
