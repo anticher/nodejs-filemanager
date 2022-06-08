@@ -3,6 +3,7 @@ import { showDirectory } from './showDirectory.js'
 import { up } from './navigation/up.js'
 import { cd } from './navigation/cd.js'
 import { ls } from './navigation/ls.js'
+import { cat } from './basic/cat.js'
 
 export const transformStream = new Transform({
     async transform(data, encoding, callback) {
@@ -25,6 +26,9 @@ export const transformStream = new Transform({
             // } else if (dataString === 'error') {
             //     const resultString = 'Operation failed' + showDirectory()
             //     callback(null, resultString)
+        } else if (dataString.startsWith('cat')) {
+            const resultString = await cat(dataString) + showDirectory()
+            callback(null, resultString)
         } else {
             const resultString = 'transform !!!' + showDirectory()
             callback(null, resultString)
