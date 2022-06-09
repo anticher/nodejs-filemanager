@@ -4,6 +4,11 @@ import { up } from './navigation/up.js'
 import { cd } from './navigation/cd.js'
 import { ls } from './navigation/ls.js'
 import { cat } from './basic/cat.js'
+import { add } from './basic/add.js'
+import { rn } from './basic/rn.js'
+import { copy } from './basic/copy.js'
+import { move } from './basic/move.js'
+import { remove } from './basic/remove.js'
 
 export const transformStream = new Transform({
     async transform(data, encoding, callback) {
@@ -11,27 +16,37 @@ export const transformStream = new Transform({
             return
         }
         const dataString = data.toString('utf8').trim()
-        if (dataString === 'up') {
-            const resultString = up() + showDirectory()
-            callback(null, resultString)
-        } else if (dataString.startsWith('cd')) {
-            const resultString = cd(dataString) + showDirectory()
-            callback(null, resultString)
-        } else if (dataString === 'ls') {
-            const resultString = await ls() + showDirectory()
-            callback(null, resultString)
-            // }else if (dataString === 'unknown') {
-            //     const resultString = '\x1b[36m\n' + 'Invalid input' + '\x1b[97m\n' + showDirectory()
-            //     callback(null, resultString)
-            // } else if (dataString === 'error') {
-            //     const resultString = 'Operation failed' + showDirectory()
-            //     callback(null, resultString)
-        } else if (dataString.startsWith('cat')) {
-            const resultString = await cat(dataString) + showDirectory()
-            callback(null, resultString)
-        } else {
-            const resultString = 'transform !!!' + showDirectory()
-            callback(null, resultString)
+        switch (true) {
+            case dataString === 'up':
+                callback(null, up() + showDirectory())
+                break
+            case dataString.startsWith('cd'):
+                callback(null, cd(dataString) + showDirectory())
+                break
+            case dataString === 'ls':
+                callback(null, await ls() + showDirectory())
+                break
+            case dataString.startsWith('cat'):
+                callback(null, await cat(dataString) + showDirectory())
+                break
+            case dataString.startsWith('add'):
+                callback(null, await add(dataString) + showDirectory())
+                break
+            case dataString.startsWith('rn'):
+                callback(null, await rn(dataString) + showDirectory())
+                break
+            case dataString.startsWith('copy'):
+                callback(null, await copy(dataString) + showDirectory())
+                break
+            case dataString.startsWith('move'):
+                callback(null, await move(dataString) + showDirectory())
+                break
+            case dataString.startsWith('rm'):
+                callback(null, await remove(dataString) + showDirectory())
+                break
+            default:
+                callback(null, 'transform default' + showDirectory())
+                break
         }
     }
 })

@@ -1,10 +1,13 @@
+import * as path from 'path'
+
 export const cd = (commandString) => {
     try {
-        const path = commandString.substring(3)
-        if (path.startsWith('.')) {
-            process.chdir(path)
+        const cwd = process.cwd().toLowerCase()
+        const directoryPath = commandString.substring(3)
+        if (directoryPath.toLowerCase().startsWith(cwd)) {
+            process.chdir(directoryPath)
         } else {
-            process.chdir(process.cwd() + '/' + path)
+            process.chdir(path.join(process.cwd(), directoryPath))
         }
         return 'Operation completed'
     }
