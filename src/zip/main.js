@@ -1,15 +1,22 @@
-// import { copyFile } from 'fs/promises'
+import { createBrotliCompress, createBrotliDecompress } from 'zlib'
 import { parsePaths } from '../utility/parsePaths.js'
 import { pipeline } from 'stream'
 import { createReadStream, createWriteStream } from 'fs'
 
-export const copy = async (commandString) => {
+export const zip = async (commandString) => {
     try {
         const paths = parsePaths(commandString)
-        // await copyFile(...paths)
         const source = createReadStream(paths[0])
         const destination = createWriteStream(paths[1])
-        pipeline(source, destination, (err) => {
+        let brotli
+        if (commandString.startsWith('compress')) {
+            brotli = createBrotliCompress()
+        } else if (commandString.startsWith('decompress')) {
+            brotli = createBrotliDecompress()
+        } else {
+            throw new Error('Invalid input')
+        }
+        pipeline(source, brotli, destination, (err) => {
             if (err) {
                 throw new Error('ZIP operation failed')
             }

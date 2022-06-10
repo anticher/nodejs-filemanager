@@ -9,6 +9,9 @@ import { rn } from './basic/rn.js'
 import { copy } from './basic/copy.js'
 import { move } from './basic/move.js'
 import { remove } from './basic/remove.js'
+import { calcHash } from './hash/calcHash.js'
+import { zip } from './zip/main.js'
+import { main as osInfo } from './os/main.js'
 
 export const transformStream = new Transform({
     async transform(data, encoding, callback) {
@@ -43,6 +46,15 @@ export const transformStream = new Transform({
                 break
             case dataString.startsWith('rm'):
                 callback(null, await remove(dataString) + showDirectory())
+                break
+                case dataString.startsWith('os'):
+                callback(null, osInfo(dataString) + showDirectory())
+                break
+                case dataString.startsWith('hash'):
+                callback(null, await calcHash(dataString) + showDirectory())
+                break
+                case dataString.startsWith('compress') || dataString.startsWith('decompress'):
+                callback(null, await zip(dataString) + showDirectory())
                 break
             default:
                 callback(null, 'transform default' + showDirectory())
