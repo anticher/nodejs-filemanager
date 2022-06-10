@@ -1,4 +1,3 @@
-// import { copyFile } from 'fs/promises'
 import { parsePaths } from '../utility/parsePaths.js'
 import { pipeline } from 'stream'
 import { createReadStream, createWriteStream } from 'fs'
@@ -6,7 +5,6 @@ import { createReadStream, createWriteStream } from 'fs'
 export const copy = async (commandString) => {
     try {
         const paths = parsePaths(commandString)
-        // await copyFile(...paths)
         const source = createReadStream(paths[0])
         const destination = createWriteStream(paths[1])
         pipeline(source, destination, (err) => {
