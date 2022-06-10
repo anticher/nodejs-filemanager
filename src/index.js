@@ -1,24 +1,9 @@
-// import { createReadStream, createWriteStream } from 'fs'
-// import * as path from 'path'
-// import { fileURLToPath } from 'url'
+import { readUserInput } from './main/readUserInput.js'
+import { initFunc } from './main/initFunc.js'
 
-// const __filename = fileURLToPath(import.meta.url)
-// const __dirname = path.dirname(__filename)
-
-import { showGreetingMessage } from './showGreetingMessage.js'
-import { showLeaveMessage } from './showLeaveMessage.js'
-import { readUserInput } from './readUserInput.js'
-
-const mainFlow = async () => {
-    showGreetingMessage()
+const mainFlow = () => {
+    initFunc()
     readUserInput()
-    process.on('SIGINT', function () {
-        showLeaveMessage()
-        process.exit(0)
-    })
-    
 } 
 
 mainFlow()
-
-
