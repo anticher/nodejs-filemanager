@@ -1,4 +1,5 @@
 import { copyFile, rm } from 'fs/promises'
+import { getResultMessage } from '../utility/getResultMessage.js'
 import { parsePaths } from '../utility/parsePaths.js'
 
 export const move = async (commandString) => {
@@ -6,9 +7,9 @@ export const move = async (commandString) => {
         const paths = parsePaths(commandString)
         await copyFile(...paths)
         await rm(paths[0])
-        return 'Operation completed'
+        return getResultMessage('completed')
     }
     catch {
-        return 'Operation failed'
+        return getResultMessage('failed')
     }
 }

@@ -13,11 +13,12 @@ import { calcHash } from '../hash/calcHash.js'
 import { zip } from '../zip/main.js'
 import { main as osInfo } from '../os/main.js'
 import { onProcessExit } from './onProcessExit.js'
+import { getResultMessage } from '../utility/getResultMessage.js'
 
 export const transformStream = new Transform({
     async transform(data, encoding, callback) {
         if (encoding !== 'buffer') {
-            return 'Invalid input'
+            return getResultMessage('invalid')
         }
         const dataString = data.toString('utf8').trim()
         switch (true) {
@@ -61,7 +62,7 @@ export const transformStream = new Transform({
                 callback(null, await zip(dataString) + showDirectory())
                 break
             default:
-                callback(null, 'Invalid input' + showDirectory())
+                callback(null, getResultMessage('invalid') + showDirectory())
                 break
         }
     }

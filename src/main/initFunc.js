@@ -14,5 +14,5 @@ export const initFunc = () => {
         userName = firstArg.substring(11)
     }
     showGreetingMessage(userName)
-    showDirectory()
+    process.stdout.write(showDirectory())
 }

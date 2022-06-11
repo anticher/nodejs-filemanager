@@ -1,4 +1,5 @@
 import { homedir } from 'os'
+import { getResultMessage } from '../utility/getResultMessage.js'
 
 export const getHomeDir = () => {
     try {
@@ -8,6 +9,6 @@ export const getHomeDir = () => {
         throw new Error('no homedir')
     }
     catch {
-        return 'Operation failed'
+        return getResultMessage('failed')
     }
 }

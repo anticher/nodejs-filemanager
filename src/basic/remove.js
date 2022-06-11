@@ -1,13 +1,14 @@
 import { rm } from 'fs/promises'
+import { getResultMessage } from '../utility/getResultMessage.js'
 import { parsePath } from '../utility/parsePath.js'
 
 export const remove = async (commandString) => {
     try {
         const filePath = parsePath(commandString)
         await rm(filePath)
-        return 'Operation completed'
+        return getResultMessage('copleted')
     }
     catch {
-        return 'Operation failed'
+        return getResultMessage('failed')
     }
 }

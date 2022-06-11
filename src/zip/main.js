@@ -2,6 +2,7 @@ import { createBrotliCompress, createBrotliDecompress } from 'zlib'
 import { parsePaths } from '../utility/parsePaths.js'
 import { pipeline } from 'stream'
 import { createReadStream, createWriteStream } from 'fs'
+import { getResultMessage } from '../utility/getResultMessage.js'
 
 export const zip = async (commandString) => {
     try {
@@ -21,9 +22,9 @@ export const zip = async (commandString) => {
                 throw new Error('ZIP operation failed')
             }
         })
-        return 'Operation completed'
+        return getResultMessage('completed')
     }
     catch {
-        return 'Operation failed'
+        return getResultMessage('failed')
     }
 }

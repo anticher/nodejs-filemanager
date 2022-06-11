@@ -1,4 +1,5 @@
 import { cpus } from 'os'
+import { getResultMessage } from '../utility/getResultMessage.js'
 
 export const getCpus = () => {
     try {
@@ -19,6 +20,6 @@ export const getCpus = () => {
         throw new Error('no cpuInfo')
     }
     catch {
-        return 'Operation failed'
+        return getResultMessage('failed')
     }
 }

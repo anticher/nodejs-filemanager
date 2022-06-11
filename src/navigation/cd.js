@@ -1,4 +1,5 @@
 import * as path from 'path'
+import { getResultMessage } from '../utility/getResultMessage.js'
 
 export const cd = (commandString) => {
     try {
@@ -9,10 +10,10 @@ export const cd = (commandString) => {
         } else {
             process.chdir(path.join(process.cwd(), directoryPath))
         }
-        return 'Operation completed'
+        return getResultMessage('completed')
     }
     catch {
-        return 'Operation failed'
+        return getResultMessage('failed')
     }
 
 }

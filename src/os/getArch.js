@@ -1,4 +1,5 @@
 import { arch } from 'os'
+import { getResultMessage } from '../utility/getResultMessage.js'
 
 export const getArch = () => {
     try {
@@ -9,6 +10,6 @@ export const getArch = () => {
         throw new Error('no architecture')
     }
     catch {
-        return 'Operation failed'
+        return getResultMessage('failed')
     }
 }

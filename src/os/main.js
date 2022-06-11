@@ -4,6 +4,7 @@ import { getHomeDir } from './getHomeDir.js'
 import { getUserName } from './getUserName.js'
 import { getArch } from './getArch.js'
 import { parseArg } from '../utility/parseArg.js'
+import { getResultMessage } from '../utility/getResultMessage.js'
 
 export const main = (commandString) => {
     const argument = parseArg(commandString)
@@ -19,6 +20,6 @@ export const main = (commandString) => {
         case argument === '--architecture':
             return getArch()
         default:
-            return 'Invalid input'
+            return getResultMessage('invalid')
     }
 }

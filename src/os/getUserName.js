@@ -1,4 +1,5 @@
 import { userInfo } from 'os'
+import { getResultMessage } from '../utility/getResultMessage.js'
 
 export const getUserName = () => {
     try {
@@ -9,6 +10,6 @@ export const getUserName = () => {
         throw new Error('no userName')
     }
     catch {
-        return 'Operation failed'
+        return getResultMessage('failed')
     }
 }

@@ -1,4 +1,5 @@
 import { EOL } from 'os'
+import { getResultMessage } from '../utility/getResultMessage.js'
 
 export const getEol = () => {
     try {
@@ -9,6 +10,6 @@ export const getEol = () => {
         throw new Error('no EOL')
     }
     catch {
-        return 'Operation failed'
+        return getResultMessage('failed')
     }
 }

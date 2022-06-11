@@ -1,7 +1,9 @@
+import { getResultMessage } from "../utility/getResultMessage.js"
+
 export const up = () => {
     if (process.cwd() !== process.env.HOME) {
         process.chdir('..')
-        return 'Operation completed'
+        return getResultMessage('completed')
     }
-    return 'you are already in the root folder'
+    return getResultMessage('failed')
 }

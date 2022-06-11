@@ -1,4 +1,5 @@
 import { createReadStream } from 'fs'
+import { getResultMessage } from '../utility/getResultMessage.js'
 import { parsePath } from '../utility/parsePath.js'
 
 const readFile = async (filePath) => {
@@ -18,9 +19,9 @@ export const cat = async (commandString) => {
     try {
         const filePath = parsePath(commandString)
         const result = await readFile(filePath)
-        return 'Operation completed, result is:\n' + result
+        return getResultMessage('completed') + ' result is:\n' + result
     }
     catch {
-        return 'Operation failed'
+        return getResultMessage('failed')
     }
 }
