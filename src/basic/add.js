@@ -4,12 +4,15 @@ import { getResultMessage } from '../utility/getResultMessage.js'
 
 const write = (destination) => {
     return new Promise((resolve, reject) => {
-        const writeStream = createWriteStream(destination)
-        writeStream.write('', 'utf-8')
-        writeStream.on('finish', () => {
+        const wtitableStream = createWriteStream(destination)
+        wtitableStream.write('', 'utf-8')
+        wtitableStream.on('finish', () => {
             resolve()
         })
-        writeStream.end()
+        wtitableStream.on('error', () => {
+            reject()
+        })
+        wtitableStream.end()
     })
 }
 

@@ -12,6 +12,9 @@ const readFile = async (filePath) => {
         readableStream.on('end', () => {
             resolve(buffer)
         })
+        readableStream.on('error', () => {
+            reject()
+        })
     })
 }
 
