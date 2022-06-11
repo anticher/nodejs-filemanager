@@ -6,7 +6,7 @@ export const remove = async (commandString) => {
     try {
         const filePath = parsePath(commandString)
         await rm(filePath)
-        return getResultMessage('copleted')
+        return getResultMessage('completed')
     }
     catch {
         return getResultMessage('failed')

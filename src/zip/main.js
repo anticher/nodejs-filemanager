@@ -1,6 +1,7 @@
 import { createBrotliCompress, createBrotliDecompress } from 'zlib'
 import { parsePaths } from '../utility/parsePaths.js'
 import { pipeline } from 'stream'
+import { promisify } from 'util'
 import { createReadStream, createWriteStream } from 'fs'
 import { getResultMessage } from '../utility/getResultMessage.js'
 
@@ -14,14 +15,9 @@ export const zip = async (commandString) => {
             brotli = createBrotliCompress()
         } else if (commandString.startsWith('decompress')) {
             brotli = createBrotliDecompress()
-        } else {
-            throw new Error('Invalid input')
         }
-        pipeline(source, brotli, destination, (err) => {
-            if (err) {
-                throw new Error('ZIP operation failed')
-            }
-        })
+        const pipelineAsync = promisify(pipeline)
+        await pipelineAsync(source, brotli, destination)
         return getResultMessage('completed')
     }
     catch {

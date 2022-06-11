@@ -28,37 +28,37 @@ export const transformStream = new Transform({
             case dataString === 'up':
                 callback(null, up() + showDirectory())
                 break
-            case dataString.startsWith('cd'):
+            case dataString.startsWith('cd') && dataString.length > 3:
                 callback(null, cd(dataString) + showDirectory())
                 break
             case dataString === 'ls':
                 callback(null, await ls() + showDirectory())
                 break
-            case dataString.startsWith('cat'):
+            case dataString.startsWith('cat') && dataString.length > 4:
                 callback(null, await cat(dataString) + showDirectory())
                 break
-            case dataString.startsWith('add'):
+            case dataString.startsWith('add') && dataString.length > 4:
                 callback(null, await add(dataString) + showDirectory())
                 break
-            case dataString.startsWith('rn'):
+            case dataString.startsWith('rn') && dataString.length > 3:
                 callback(null, await rn(dataString) + showDirectory())
                 break
-            case dataString.startsWith('copy'):
+            case dataString.startsWith('copy')  && dataString.length > 5:
                 callback(null, await copy(dataString) + showDirectory())
                 break
-            case dataString.startsWith('move'):
+            case dataString.startsWith('mv') && dataString.length > 3:
                 callback(null, await move(dataString) + showDirectory())
                 break
-            case dataString.startsWith('rm'):
+            case dataString.startsWith('rm') && dataString.length > 3:
                 callback(null, await remove(dataString) + showDirectory())
                 break
-            case dataString.startsWith('os'):
+            case dataString.startsWith('os') && dataString.length > 3:
                 callback(null, osInfo(dataString) + showDirectory())
                 break
-            case dataString.startsWith('hash'):
+            case dataString.startsWith('hash') && dataString.length > 5:
                 callback(null, await calcHash(dataString) + showDirectory())
                 break
-            case dataString.startsWith('compress') || dataString.startsWith('decompress'):
+            case (dataString.startsWith('compress')  && dataString.length > 9) || (dataString.startsWith('decompress') && dataString.length > 11):
                 callback(null, await zip(dataString) + showDirectory())
                 break
             default:

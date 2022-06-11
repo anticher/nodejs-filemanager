@@ -6,7 +6,7 @@ export const rn = async (commandString) => {
     try {
         const paths = parsePaths(commandString)
         await rename(...paths)
-        return getResultMessage('conpleted')
+        return getResultMessage('completed')
     }
     catch {
         return getResultMessage('failed')

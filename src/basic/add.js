@@ -23,6 +23,6 @@ export const add = async (commandString) => {
         return getResultMessage('completed')
     }
     catch {
-        return getResultMessage('completed')
+        return getResultMessage('failed')
     }
 }
